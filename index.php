@@ -1,13 +1,8 @@
 <?php
 
-	if(isset($_GET['id'])){
+	include_once 'view/page.php';
 
-		include 'view/note.php';
-
-	}else{
-
-		include 'view/listnotes.php';
-
-	}
+	$pageRef = new Page('Simple Notes');
+	$pageRef->buildPage();
 
 ?>

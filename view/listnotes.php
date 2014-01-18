@@ -1,8 +1,8 @@
 <?php
 
-	include_once 'modal/notes.php';
+	include_once 'modal/listnotes.php';
 
-	$notesModal = new NotesModal();
+	$notesModal = new ListNotesModal();
 	$data = $notesModal->getData();
 
 	if($data){

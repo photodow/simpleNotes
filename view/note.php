@@ -3,7 +3,8 @@
 	$id = $_GET['id'];
 
 	if(is_numeric($id)){
-		include_once 'modal/notes.php';
+		
+		include_once 'modal/singlenote.php';
 
 		$notesModal = new SingleNoteModal($_GET[id]);
 		$data = $notesModal->getData();
@@ -17,6 +18,7 @@
 		}else{
 			header('Location: /simpleNotes/');
 		}
+
 	}else{
 		header('Location: /simpleNotes/');
 	}
