@@ -18,6 +18,7 @@
 		}
 
 		private function connectDB(){
+			$this->db = new PDO($this->dsn, $this->user, $this->pass);
 		}
 
 		public function getDB(){
