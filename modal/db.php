@@ -7,8 +7,8 @@
 		private $pass;
 		private $db;
 
-		public function __construct($dbName){
-			$this->setCred($dbName, 'photodow', '67QceLYPWwyHZTET', 'localhost', '3306');
+		public function __construct(){
+			$this->setCred('dbf1401', 'photodow', '67QceLYPWwyHZTET', 'localhost', '3306');
 			$this->connectDB();
 		}
 
