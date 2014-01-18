@@ -22,6 +22,7 @@
 		}
 
 		public function getDB(){
+			return $this->db;
 		}
 
 	}
