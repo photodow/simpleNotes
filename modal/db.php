@@ -9,6 +9,7 @@
 
 		public function __construct($dbName){
 			$this->setCred($dbName, 'photodow', '67QceLYPWwyHZTET', 'localhost', '3306');
+			$this->connectDB();
 		}
 
 		private function setCred($dbName, $user, $pass, $host, $port){
