@@ -8,6 +8,14 @@
 
 		}
 
+		private function selectData(){
+
+		}
+
+		public function getData(){
+			
+		}
+
 	}
 
 ?>
