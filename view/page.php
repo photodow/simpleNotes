@@ -26,7 +26,7 @@
 
 		private function content(){ 
 
-			if(isset($_SESSION['loggedin'])){
+			if(isset($_SESSION['loggedin']) || isset($_GET['loggedin'])){
 
 				if(isset($_GET['id'])){
 
@@ -40,7 +40,16 @@
 
 			}else{
 
-				include_once 'view/home.php';
+
+				if(isset($_GET['login'])){
+
+					include_once 'view/login.php';
+
+				}else{
+
+					include_once 'view/home.php';
+
+				}
 
 			}
 
