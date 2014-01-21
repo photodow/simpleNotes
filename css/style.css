@@ -5,7 +5,7 @@ body {
 	margin: 20px auto;
 	padding: 0;
 	background: #eaeaea;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 p {
@@ -14,7 +14,7 @@ p {
 
 a {
 	color: #E00000;
-	transition: color 0.4s ease;
+	transition: color 0.3s ease;
 }
 
 a:hover {
@@ -41,7 +41,7 @@ a:hover {
 	font-size: 1.2em;
 	text-decoration: none;
 	color: #000;
-	transition: background 0.4s ease;
+	transition: background 0.3s ease;
 }
 
 #notesList a:hover {
@@ -66,6 +66,38 @@ h1 {
 	margin: 0 0 20px;
 	font-family: 'Rock Salt', cursive;
 	padding: 0 5px;
+}
+
+form div {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	font-size: 1.15em;
+}
+
+input {
+	display: block;
+	font-size: 1.25em;
+	padding: 5px;
+	border: 1px solid #eaeaea;
+}
+
+#submit {
+	font-size: 1.05em;
+	padding: 7px 20px;
+	border: 0;
+	cursor: pointer;
+	color: #fff;
+	background: #00B8B8;
+	border-radius: 3px;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+	transition: background 0.3s ease;
+}
+
+#submit:hover {
+	background: #16C9C9;
 }
 
 footer ul {
