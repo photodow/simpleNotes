@@ -26,13 +26,21 @@
 
 		private function content(){ 
 
-			if(isset($_GET['id'])){
+			if(isset($_SESSION['loggedin'])){
+
+				if(isset($_GET['id'])){
 
 				include_once 'view/note.php';
 
+				}else{
+
+					include_once 'view/listnotes.php';
+
+				}
+
 			}else{
 
-				include_once 'view/listnotes.php';
+				include_once 'view/home.php';
 
 			}
 

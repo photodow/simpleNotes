@@ -6,10 +6,10 @@
 	$data = $notesModal->getData();
 
 	if($data){
-		echo '<ul>';
+		echo '<ul id="notesList">';
 		foreach($data as $row){
 			echo '<li>';
-			echo '<h1><a href="?id=' . $row['id'] . '">' . $row['title'] . '</a></h1>';
+			echo '<a href="?id=' . $row['id'] . '">' . $row['title'] . '</a>';
 			echo '</li>';
 		};
 		echo '</ul>';

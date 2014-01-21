@@ -11,7 +11,7 @@
 
 		if($data){
 
-			echo '<h1>' . $data['title'] . '</h1>';
+			echo '<h2>' . $data['title'] . '</h2>';
 			echo '<p>' . $data['noteText'] . '</p>';
 			echo '<a href="/simpleNotes/">Go Back</a>';
 
