@@ -9,5 +9,5 @@
 	<body>
 		<section id="content">
 			<header>
-				<h1><?php echo $title; ?></h1>
+				<h1>Simple Notes</h1>
 			</header>
