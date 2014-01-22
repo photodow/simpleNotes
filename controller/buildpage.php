@@ -2,7 +2,11 @@
 
 	class BuildPageController {
 
+		private $sessionStatus;
+
 		public function __construct($sessionStatus){
+
+			$this->sessionStatus = $sessionStatus;
 
 			if($sessionStatus){ // if user is logged in
 
@@ -46,8 +50,8 @@
 			$include = new IncludesView();
 
 			$include->header($title);
-			$include->home();
-			$include->footer();
+			$include->home($this->sessionStatus);
+			$include->footer($this->sessionStatus);
 
 		}
 
@@ -60,7 +64,7 @@
 
 			$include->header($title);
 			$include->login();
-			$include->footer();
+			$include->footer($this->sessionStatus);
 
 		}
 
@@ -78,7 +82,7 @@
 
 				$include->header($title);
 				$include->listNotes($data);
-				$include->footer();
+				$include->footer($this->sessionStatus);
 			}else{
 				header('Location: /simpleNotes/');
 			}
@@ -86,7 +90,6 @@
 		}
 
 		private function singleNote($id){
-
 
 			if(is_numeric($id)){
 
@@ -102,7 +105,7 @@
 
 					$include->header($title);
 					$include->singleNote($data);
-					$include->footer();
+					$include->footer($this->sessionStatus);
 				}else{
 					header('Location: /simpleNotes/');
 				}

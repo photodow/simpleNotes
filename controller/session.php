@@ -65,6 +65,7 @@
 					if($dbPassword === $passwordInput){
 
 						$_SESSION['loggedin'] = TRUE;
+						header('Location: /simpleNotes/?listnotes');
 
 					}else{ // error redirect and inform the user
 						header('Location: /simpleNotes/?login=error');

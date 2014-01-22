@@ -12,7 +12,7 @@
 
 		}
 
-		public function home(){
+		public function home($sessionStatus){
 
 			include_once 'view/home.php';
 
@@ -36,7 +36,7 @@
 
 		}
 
-		public function footer(){
+		public function footer($sessionStatus){
 
 			include_once 'view/footer.php';
 

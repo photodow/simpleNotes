@@ -2,4 +2,6 @@
 
 <p>Suspendisse id arcu elit. Vestibulum tincidunt convallis eros a porttitor. Sed convallis tellus vel sapien pellentesque interdum. Integer volutpat elit vitae diam pretium congue. Suspendisse sed nunc fringilla, porta mauris a, ultricies massa.</p>
 
+<?php if(!$sessionStatus){ ?>
 <a href="/simpleNotes/?login">Login</a>
+<?php } ?>
