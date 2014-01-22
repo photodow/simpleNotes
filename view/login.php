@@ -1,6 +1,6 @@
 <p>Pleast login to Create, Read, Update and Delete your notes.</p>
 
-<form method="post" action="?">
+<form method="post" action="?login=validateUser">
 	<div>
 		<label for="username">Username</label>
 		<input type="text" name="username" id="username" />

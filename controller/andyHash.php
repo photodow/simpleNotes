@@ -553,19 +553,7 @@ return $glue;
 
 
 
-} else {return 'This is not an andyHash()';}
+} else {return false;}
 
 
 } ?>
-
-
-<?php
-
-$newPassword = $_GET['pass'];
-echo $newPassword;
-echo '<br />';
-echo andyHash($newPassword);
-echo '<br />';
-echo UNandyHash(andyHash($newPassword));
-
-?>

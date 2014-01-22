@@ -2,30 +2,26 @@
 
 	class SessionController {
 
-		private $status;
+		public function __construct(){
+			$this->handle();
+		}
 
-		public function __construct($pass){
-			
-			$pass = trim($pass);
-			$pass = strip_tags($pass);
-			$pass = str_replace(' ', '', $pass);
+		private function handle(){
 
-			if(empty($pass)){
-				$pass = false;
+			session_start();
+			if($_SESSION['loggedin'] === TRUE && isset($_GET['logout'])){
+				unset($_SESSION['loggedin']);
 			}
 
-			if($pass){
-				echo $pass;
-			}else{
-				echo 'false';
-			}
+			$this->login();
 		}
 
 		private function sanitizeUser($user){
-			
+
 			$user = trim($user);
 			$user = strip_tags($user);
 			$user = str_replace(' ', '', $user);
+			$user = strtolower($user);
 
 			if(empty($user)){
 				$user = false;
@@ -47,13 +43,32 @@
 			return $pass; // returns a clean password or false
 		}
 
-		private function setStatus(){
+		private function UnHashThePass($pass){
+			include_once 'controller/andyHash.php';
+			return UNandyHash($pass);
+		}
+
+		private function login(){
 
 			if(isset($_GET['login']) && $_GET['login'] === 'validateUser'){ // check if we are on the correct page
 
-				if(sanitizeUser($_POST['username']) && sanitizePass($_POST['password'])){ // check if the correct information has been sent
+				$usernameInput = $this->sanitizeUser($_POST['username']);
+				$passwordInput = $this->sanitizePass($_POST['password']);
 
-						echo 'log them in';
+				if($usernameInput && $passwordInput){ // check if the correct information has been sent
+
+					include_once 'modal/session.php';
+					$session = new SessionModal($usernameInput);
+
+					$dbPassword = $this->UnHashThePass($session->getData());
+
+					if($dbPassword === $passwordInput){
+
+						$_SESSION['loggedin'] = TRUE;
+
+					}else{ // error redirect and inform the user
+						header('Location: /simpleNotes/?login=error');
+					}
 
 				}else{ // error redirect and inform the user
 					header('Location: /simpleNotes/?login=error');
@@ -64,7 +79,7 @@
 		}
 
 		public function getStatus(){
-			return $this->status;
+			return $_SESSION['loggedin'];
 		}
 
 	}
