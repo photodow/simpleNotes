@@ -114,3 +114,10 @@ footer ul li {
 	padding-left: 10px;
 	font-size: .8em;
 }
+
+p.error {
+	padding: 10px;
+	border: 1px solid #f00;
+	background: #FFBEBE;
+	color: #f00;
+}
