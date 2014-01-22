@@ -35,9 +35,14 @@
 		}
 
 		private function sanitizePass($pass){
+			
+			$pass = trim($pass);
+			$pass = strip_tags($pass);
+			$pass = str_replace(' ', '', $pass);
 
-			$pass = trim($pass);
-			$pass = trim($pass);
+			if(empty($pass)){
+				$pass = false;
+			}
 
 			return $pass; // returns a clean password or false
 		}
