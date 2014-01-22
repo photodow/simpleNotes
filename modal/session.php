@@ -4,18 +4,16 @@
 
 	class SessionModal {
 
-		private $password;
-
-		public function __construct($username){
-			$this->selectData($username);
+		public function __construct($user){
+			$this->selectData($user);
 		}
 
 		private function selectData($user){
 
 			$dbModel = new dbModel('dbf1401');
 			$dbRef = $dbModel->getDB();
-			$query = $dbRef->prepare("SELECT password FROM users WHERE username = '" . $user . "'");
-			$query->execute();
+			$query = $dbRef->prepare("SELECT password FROM users WHERE (username = :user)");
+			$query->execute(array(':user' => $user));
 
 			$this->data = $query->fetchAll();
 

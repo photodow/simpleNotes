@@ -9,6 +9,7 @@
 		private function handle(){
 
 			session_start();
+			
 			if($_SESSION['loggedin'] === TRUE && isset($_GET['logout'])){
 				unset($_SESSION['loggedin']);
 			}
