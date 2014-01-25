@@ -100,7 +100,7 @@ input {
 	background: #16C9C9;
 }
 
-footer ul {
+footer > ul {
 	list-style-type: none;
 	margin: 20px 0 0;
 	padding: 0;
@@ -108,11 +108,65 @@ footer ul {
 	float: right;
 }
 
-footer ul li {
+footer > ul > li {
 	float: left;
 	margin-left: 10px;
 	padding-left: 10px;
 	font-size: .8em;
+}
+
+footer > ul > li ul {
+	display: none;
+	list-style-type: none;
+	position: absolute;
+	padding: 0;
+	border-top: 3px solid #fff;
+
+	-moz-box-shadow: 0px 1px 2px 0px #ccc;
+	-webkit-box-shadow: 0px 1px 2px 0px #ccc;
+	box-shadow: 0px 1px 2px 0px #ccc;
+}
+
+footer > ul > li:hover ul {
+	display: block;
+}
+
+footer > ul > li ul li a {
+	padding: 5px 10px;
+	display: block;
+	background: #00B8B8;
+	transition: background 0.3s ease;
+	color: #fff;
+	text-decoration: none;
+	min-width: 100px;
+	border-top: 1px solid #fff;
+}
+
+footer > ul > li ul li a:hover {
+	background: #16C9C9;
+	color: #fff;
+}
+
+footer > ul li a div.downArrow {
+	width: 0; 
+	height: 0; 
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	
+	border-top: 4px solid #515151;
+	float: right;
+	margin-left: 4px;
+	margin-top: 4px;
+
+	transition: border-color 0.3s ease;
+}
+
+footer > ul > li > a div.downArrow {
+	border-top-color: #E00000;
+}
+
+footer > ul > li > a:hover div.downArrow {
+	border-top-color: #00B8B8;
 }
 
 p.error {

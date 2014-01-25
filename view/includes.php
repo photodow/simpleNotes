@@ -36,6 +36,12 @@
 
 		}
 
+		public function changePasswordForm(){
+			
+			include_once 'view/changePasswordForm.php';
+
+		}
+
 		public function footer($sessionStatus){
 
 			include_once 'view/footer.php';

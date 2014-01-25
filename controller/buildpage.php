@@ -18,6 +18,10 @@
 
 					$this->singleNote($_GET['note']);
 
+				}else if(isset($_GET['userProfile'])){
+
+					$this->changePassword($_GET['note']);
+
 				}else{
 
 					// 404: no page could be found
@@ -113,6 +117,19 @@
 			}else{
 				header('Location: /simpleNotes/');
 			}
+
+		}
+
+		private function changePassword(){
+
+				$title = 'Change Password';
+
+				include_once 'view/includes.php';
+				$include = new IncludesView();
+
+				$include->header($title);
+				$include->changePasswordForm();
+				$include->footer($this->sessionStatus);
 
 		}
 
