@@ -6,7 +6,7 @@
 
 		}
 
-		public function header($title){
+		public function header($title, $sessionStatus){
 
 			include_once 'view/header.php';
 
@@ -30,6 +30,18 @@
 
 		}
 
+		public function addNoteForm(){
+
+			include_once 'view/addnote.php';
+
+		}
+
+		public function editNoteForm($data){
+
+			include_once 'view/editnote.php';
+
+		}
+
 		public function listNotes($data){
 			
 			include_once 'view/listnotes.php';
@@ -38,7 +50,13 @@
 
 		public function changePasswordForm(){
 			
-			include_once 'view/changePasswordForm.php';
+			include_once 'view/changepasswordform.php';
+
+		}
+
+		public function registerForm(){
+			
+			include_once 'view/registerform.php';
 
 		}
 

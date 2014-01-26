@@ -18,9 +18,17 @@
 
 					$this->singleNote($_GET['note']);
 
-				}else if(isset($_GET['userProfile'])){
+				}else if(isset($_GET['settings'])){
 
-					$this->changePassword($_GET['note']);
+					$this->settings();
+
+				}else if(isset($_GET['addNote'])){
+
+					$this->addNote();
+
+				}else if(isset($_GET['editNote'])){
+
+					$this->editNote();
 
 				}else{
 
@@ -34,6 +42,10 @@
 				if(isset($_GET['login'])){
 
 					$this->login();
+
+				}else if(isset($_GET['register'])){
+
+					$this->register();
 
 				}else{
 
@@ -53,7 +65,7 @@
 			include_once 'view/includes.php';
 			$include = new IncludesView();
 
-			$include->header($title);
+			$include->header($title, $this->sessionStatus);
 			$include->home($this->sessionStatus);
 			$include->footer($this->sessionStatus);
 
@@ -66,7 +78,7 @@
 			include_once 'view/includes.php';
 			$include = new IncludesView();
 
-			$include->header($title);
+			$include->header($title, $this->sessionStatus);
 			$include->login();
 			$include->footer($this->sessionStatus);
 
@@ -84,7 +96,7 @@
 				include_once 'view/includes.php';
 				$include = new IncludesView();
 
-				$include->header($title);
+				$include->header($title, $this->sessionStatus);
 				$include->listNotes($data);
 				$include->footer($this->sessionStatus);
 			}else{
@@ -107,7 +119,7 @@
 					include_once 'view/includes.php';
 					$include = new IncludesView();
 
-					$include->header($title);
+					$include->header($title, $this->sessionStatus);
 					$include->singleNote($data);
 					$include->footer($this->sessionStatus);
 				}else{
@@ -120,15 +132,54 @@
 
 		}
 
-		private function changePassword(){
+		private function settings(){
 
 				$title = 'Change Password';
 
 				include_once 'view/includes.php';
 				$include = new IncludesView();
 
-				$include->header($title);
+				$include->header($title, $this->sessionStatus);
 				$include->changePasswordForm();
+				$include->footer($this->sessionStatus);
+
+		}
+
+		private function register(){
+
+				$title = 'Register New Account';
+
+				include_once 'view/includes.php';
+				$include = new IncludesView();
+
+				$include->header($title, $this->sessionStatus);
+				$include->registerForm();
+				$include->footer($this->sessionStatus);
+
+		}
+
+		private function addNote(){
+
+				$title = 'Add a Simple Note';
+
+				include_once 'view/includes.php';
+				$include = new IncludesView();
+
+				$include->header($title, $this->sessionStatus);
+				$include->addNoteForm();
+				$include->footer($this->sessionStatus);
+
+		}
+
+		private function editNote(){
+
+				$title = 'Add a Simple Note';
+
+				include_once 'view/includes.php';
+				$include = new IncludesView();
+
+				$include->header($title, $this->sessionStatus);
+				$include->editNoteForm();
 				$include->footer($this->sessionStatus);
 
 		}
