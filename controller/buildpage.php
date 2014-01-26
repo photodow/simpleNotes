@@ -28,7 +28,11 @@
 
 				}else if(isset($_GET['editNote'])){
 
-					$this->editNote();
+					$this->editNote($_GET['editNote']);
+
+				}else if(isset($_GET['delete'])){
+
+					$this->delete($_GET['delete']);
 
 				}else{
 
@@ -89,7 +93,7 @@
 			$title = 'List Simple Notes';
 
 			include_once 'modal/listnotes.php';
-			$listNotes = new ListNotesModal();
+			$listNotes = new ListNotesModal($this->sessionStatus);
 			$data = $listNotes->getData();
 
 			if($data){
@@ -125,6 +129,21 @@
 				}else{
 					header('Location: /simpleNotes/');
 				}
+
+			}else{
+				header('Location: /simpleNotes/');
+			}
+
+		}
+
+		private function delete($id){
+
+			if(is_numeric($id)){
+
+				include_once 'modal/delete.php';
+				new DeleteModal($id, '18294');
+				
+				header('Location: /simpleNotes?listnotes');
 
 			}else{
 				header('Location: /simpleNotes/');
@@ -171,16 +190,32 @@
 
 		}
 
-		private function editNote(){
+		private function editNote($id){
 
-				$title = 'Add a Simple Note';
+			if(is_numeric($id)){
 
-				include_once 'view/includes.php';
-				$include = new IncludesView();
+				$title = 'Edit Your Simple Note';
 
-				$include->header($title, $this->sessionStatus);
-				$include->editNoteForm();
-				$include->footer($this->sessionStatus);
+				include_once 'modal/singlenote.php';
+				$singleNote = new SingleNoteModal($id);
+				$data = $singleNote->getData();
+
+				if($data){
+
+					include_once 'view/includes.php';
+					$include = new IncludesView();
+
+					$include->header($title, $this->sessionStatus);
+					$include->editNoteForm($data);
+					$include->footer($this->sessionStatus);
+
+				}else{
+					header('Location: /simpleNotes?listnotes');
+				}
+
+			}else{
+				header('Location: /simpleNotes?listnotes');
+			}
 
 		}
 

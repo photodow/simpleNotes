@@ -14,7 +14,7 @@
 
 			$dbModel = new dbModel('dbf1401');
 			$dbRef = $dbModel->getDB();
-			$query = $dbRef->prepare("SELECT * FROM notes WHERE noteStatus = 'public' AND id = " . $id);
+			$query = $dbRef->prepare("SELECT * FROM notes WHERE id = " . $id);
 			$query->execute();
 
 			$this->data = $query->fetchAll();

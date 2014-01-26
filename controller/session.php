@@ -61,11 +61,11 @@
 					include_once 'modal/session.php';
 					$session = new SessionModal($usernameInput);
 
-					$dbPassword = $this->UnHashThePass($session->getData());
+					$dbPassword = $this->UnHashThePass($session->getPassword());
 
 					if($dbPassword === $passwordInput){
 
-						$_SESSION['loggedin'] = TRUE;
+						$_SESSION['loggedin'] = $session->getUserId();
 						header('Location: /simpleNotes/?listnotes');
 
 					}else{ // error redirect and inform the user

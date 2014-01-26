@@ -2,10 +2,10 @@
 <p>You can edit this note here.</p>
 <form method="POST" action="?editNote">
 	<div>
-		<input type="text" name="noteTitle" id="noteTitle" value="Your Note's Title Will Go Here..." />
+		<input type="text" name="noteTitle" id="noteTitle" value="<?php echo $data['title']; ?>" />
 	</div>
 	<div>
-		<textarea name="noteBody" id="noteBody">The body of your note will go here.</textarea>
+		<textarea name="noteBody" id="noteBody"><?php echo $data['noteText']; ?></textarea>
 	</div>
 	<div>
 		<input type="submit" id="submit" value="Save Changes" />
