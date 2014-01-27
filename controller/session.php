@@ -10,7 +10,7 @@
 
 			session_start();
 			
-			if($_SESSION['loggedin'] === TRUE && isset($_GET['logout'])){
+			if(!empty($_SESSION['loggedin']) && isset($_GET['logout'])){
 				unset($_SESSION['loggedin']);
 			}
 

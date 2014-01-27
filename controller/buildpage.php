@@ -24,11 +24,27 @@
 
 				}else if(isset($_GET['addNote'])){
 
-					$this->addNote();
+					if($_GET['addNote'] === 'create'){
+
+						$this->createNote($_POST['noteTitle'], $_POST['noteBody']);
+
+					}else{
+
+						$this->addNote();
+
+					}
 
 				}else if(isset($_GET['editNote'])){
 
-					$this->editNote($_GET['editNote']);
+					if($_GET['editNote'] === 'edit'){
+
+						$this->editNoteExec($_POST['noteId'], $_POST['noteTitle'], $_POST['noteBody']); //$noteId, $title, $body
+
+					}else{
+
+						$this->editNote($_GET['editNote']);
+
+					}
 
 				}else if(isset($_GET['delete'])){
 
@@ -49,7 +65,15 @@
 
 				}else if(isset($_GET['register'])){
 
-					$this->register();
+					if($_GET['register'] === 'execute'){
+
+						$this->registerUserExec($_POST['firstName'], $_POST['lastName'], $_POST['userName'], $_POST['newPass'], $_POST['newPassRep']);
+
+					}else{
+
+						$this->registerUser();
+
+					}
 
 				}else{
 
@@ -96,16 +120,19 @@
 			$listNotes = new ListNotesModal($this->sessionStatus);
 			$data = $listNotes->getData();
 
-			if($data){
-				include_once 'view/includes.php';
-				$include = new IncludesView();
+			include_once 'view/includes.php';
+			$include = new IncludesView();
 
-				$include->header($title, $this->sessionStatus);
+			$include->header($title, $this->sessionStatus);
+
+			if($data){
 				$include->listNotes($data);
-				$include->footer($this->sessionStatus);
 			}else{
-				header('Location: /simpleNotes/');
+				echo "<p>You don't have any notes at this time.</p>";
+				echo "<p><a href='/simpleNotes/?addNote' title='Add a Simple Note'>Add a New Note</a></p>";
 			}
+
+			$include->footer($this->sessionStatus);
 
 		}
 
@@ -141,7 +168,7 @@
 			if(is_numeric($id)){
 
 				include_once 'modal/delete.php';
-				new DeleteModal($id, '18294');
+				new DeleteModal($id, $this->sessionStatus);
 				
 				header('Location: /simpleNotes?listnotes');
 
@@ -151,29 +178,82 @@
 
 		}
 
-		private function settings(){
+		private function createNote($title, $body){
 
-				$title = 'Change Password';
+			$title = $this->sanitizeText($title);
+			$body = $this->sanitizeText($body);
 
-				include_once 'view/includes.php';
-				$include = new IncludesView();
+			if($title && $body){
 
-				$include->header($title, $this->sessionStatus);
-				$include->changePasswordForm();
-				$include->footer($this->sessionStatus);
+				include_once 'modal/createnote.php';
+				new CreateNoteModal($this->sessionStatus, $title, $body);
+				
+				header('Location: /simpleNotes?listnotes');
+
+			}else{
+				
+				header('Location: /simpleNotes?addNote=error');
+
+			}
 
 		}
 
-		private function register(){
+		private function settings(){
 
-				$title = 'Register New Account';
+			$title = 'Change Password';
 
-				include_once 'view/includes.php';
-				$include = new IncludesView();
+			include_once 'view/includes.php';
+			$include = new IncludesView();
 
-				$include->header($title, $this->sessionStatus);
-				$include->registerForm();
-				$include->footer($this->sessionStatus);
+			$include->header($title, $this->sessionStatus);
+			$include->changePasswordForm();
+			$include->footer($this->sessionStatus);
+
+		}
+
+		private function registerUserExec($firstname, $lastname, $username, $password, $repeatPass){
+
+			$password = $this->sanitizePass($password);
+			$repeatPass = $this->sanitizePass($repeatPass);
+
+			if($password && $repeatPass && $password === $repeatPass){
+
+				$firstname = $this->sanitizeText($firstname);
+				$lastname = $this->sanitizeText($lastname);
+				$username = $this->sanitizeUser($username);
+
+				if($firstname && $lastname && $username){
+
+					$title = 'Register New Account';
+
+					include_once 'modal/registeruser.php';
+					new RegisterUserModal($firstname, $lastname, $username, $this->hashThePass($password));
+					
+					header('Location: /simpleNotes?login');
+
+				}else{
+					
+					header('Location: /simpleNotes?register=error');
+
+				}
+			}else{
+					
+				header('Location: /simpleNotes?register=error');
+
+			}
+
+		}
+
+		private function registerUser(){
+
+			$title = 'Register New Account';
+
+			include_once 'view/includes.php';
+			$include = new IncludesView();
+
+			$include->header($title, $this->sessionStatus);
+			$include->registerForm();
+			$include->footer($this->sessionStatus);
 
 		}
 
@@ -217,6 +297,76 @@
 				header('Location: /simpleNotes?listnotes');
 			}
 
+		}
+
+		private function editNoteExec($noteId, $title, $body){
+
+			if(is_numeric($noteId)){
+
+				$title = $this->sanitizeText($title);
+				$body = $this->sanitizeText($body);
+
+				if($title && $body){
+
+					include_once 'modal/updatenote.php';
+					new UpdateNoteModal($this->sessionStatus, $noteId, $title, $body);
+
+					header('Location: /simpleNotes?note=' . $noteId);
+
+				}else{
+
+					header('Location: /simpleNotes?editNote=error');
+
+				}
+
+			}else{
+				header('Location: /simpleNotes?listnotes');
+			}
+
+		}
+
+		private function sanitizeText($text){
+			
+			$text = trim($text);
+			$text = strip_tags($text);
+
+			if(empty($text)){
+				$text = false;
+			}
+
+			return $text; // returns clean text or false
+		}
+
+		private function sanitizeUser($user){
+
+			$user = trim($user);
+			$user = strip_tags($user);
+			$user = str_replace(' ', '', $user);
+			$user = strtolower($user);
+
+			if(empty($user)){
+				$user = false;
+			}
+
+			return $user; // returns a clean username or false
+		}
+
+		private function sanitizePass($pass){
+			
+			$pass = trim($pass);
+			$pass = strip_tags($pass);
+			$pass = str_replace(' ', '', $pass);
+
+			if(empty($pass)){
+				$pass = false;
+			}
+
+			return $pass; // returns a clean password or false
+		}
+
+		private function hashThePass($pass){
+			include_once 'controller/andyHash.php';
+			return andyHash($pass);
 		}
 
 	}

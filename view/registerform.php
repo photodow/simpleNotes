@@ -1,6 +1,6 @@
 <h2>Create an Account</h2>
 <p>Fill out the form below to register a new account with Simple Notes.</p>
-<form method="POST" action="?register=addUser">
+<form method="POST" action="?register=execute">
 	<?php if(isset($_GET['register']) && $_GET['register'] === 'error'){ ?>
 	<p class="error">There was a problem registering this account. Please review the fields below and submit the form again.</p>
 	<?php } ?>

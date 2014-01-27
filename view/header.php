@@ -24,9 +24,9 @@
 									<li>
 										<a href="/simpleNotes/?addNote" title="Add a Simple Note"><i class="fa fa-file-o"></i> Add Note</a>
 									</li>
-									<li>
+									<?php /*<li>
 										<a href="/simpleNotes/?settings" title="View/Edit Your Settings"><i class="fa fa-cog"></i> Settings</a>
-									</li>
+									</li>*/ ?>
 									<li>
 										<a href="/simpleNotes/?logout" title="Sign Out of Simple Notes"><i class="fa fa-sign-out"></i> Sign Out</a>
 									</li>
