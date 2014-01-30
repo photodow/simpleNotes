@@ -5,7 +5,7 @@
 
 		<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-		<link type='text/css' rel='stylesheet' href='css/style.css' />
+		<link type='text/css' rel='stylesheet' href='/simpleNotes/laravel/public/css/style.css' />
 	</head>
 	<body>
 		<aside>
