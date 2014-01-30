@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'pages@showHome');
+
+Route::get('/listnotes', 'pages@showListNotes');
