@@ -3,6 +3,7 @@
 	class Pages extends BaseController {
 
 		public function showHome(){
+			
 			return View::make('templates.pages', array('pageTitle' => 'Simple Notes'))->nest('navigationView', 'navigation')->nest('contentView', 'home');
 		
 		}
