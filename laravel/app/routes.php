@@ -14,3 +14,5 @@
 Route::get('/', 'pages@showHome');
 
 Route::get('/listnotes', 'pages@showListNotes');
+
+Route::get('/listnotes/note', 'pages@showNote');
